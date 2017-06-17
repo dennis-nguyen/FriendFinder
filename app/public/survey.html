@@ -161,7 +161,7 @@
 
         </form>
         <button type="submit" class="btn btn-primary btnSubmit">Submit</button>
-<p><a href="/api/friends">API Friends List</a></p>
+        <p><a href="/api/friends">API Friends List</a></p>
     </div>
 
 
@@ -195,6 +195,7 @@
 <script type="text/javascript">
     $(".btnSubmit").on("click", () => {
         event.preventDefault();
+
         let friend = {
             "name": $("#nameInput").val().trim(),
             "photo": $("#imageInput").val(),
@@ -212,8 +213,16 @@
             ]
         };
 
+console.log(friend.scores);
+
+        for (i = 0; i < friend.scores.length; i++) {
+            if (friend.scores[i] === "Select an Option" || friend.name === "" || friend.photo === "") {
+                alert("Please fill out all fields before submitting!")
+                return false;
+            }
+        }
+
         $.post("/survey", friend, (data) => {
-            console.log(data);
             $("#matchName").text(data.name);
             $("#matchImage").attr("src", data.photo);
         });
@@ -225,16 +234,16 @@
     let resetValues = () => {
         $("#nameInput").val("");
         $("#imageInput").val("");
-        $("#q1").val("");
-        $("#q2").val("");
-        $("#q3").val("");
-        $("#q4").val("");
-        $("#q5").val("");
-        $("#q6").val("");
-        $("#q7").val("");
-        $("#q8").val("");
-        $("#q9").val("");
-        $("#q10").val("");
+        $("#q1").val("Select an Option");
+        $("#q2").val("Select an Option");
+        $("#q3").val("Select an Option");
+        $("#q4").val("Select an Option");
+        $("#q5").val("Select an Option");
+        $("#q6").val("Select an Option");
+        $("#q7").val("Select an Option");
+        $("#q8").val("Select an Option");
+        $("#q9").val("Select an Option");
+        $("#q10").val("Select an Option");
     };
 </script>
 
